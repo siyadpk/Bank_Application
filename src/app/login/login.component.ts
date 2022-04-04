@@ -23,22 +23,24 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  acntTake(event:any){
-    this.acc=event.target.value
-    console.log(this.acc);
+  // acntTake(event:any){
+  //   this.acc=event.target.value
+  //   console.log(this.acc);
     
-  }
+  // }
 
-  paswdTake(event:any){
-    this.pwd=event.target.value
-    console.log(this.pwd);
+  // paswdTake(event:any){
+  //   this.pwd=event.target.value
+  //   console.log(this.pwd);
     
-  }
+  // }
 
 
-  login(){
-    var acc=this.acc
-    var pwd=this.pwd
+  // 
+  
+  login(a:any,p:any){
+    var acc=a.value
+    var pwd=p.value
 
     let database=this.database
     console.log(database);
@@ -58,5 +60,7 @@ export class LoginComponent implements OnInit {
       alert("user doesnot exist")
     }
   }
+
+
 
 }
