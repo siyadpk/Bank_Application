@@ -36,23 +36,23 @@
 				
 			</div>
 			<div class="card-body">
-				<form onsubmit="event.preventDefault();bank.authenticate()">
+				<form >
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" #acc placeholder="Account number" id="login_accno" required>
+						<input type="text" class="form-control" name="accountnum" [(ngModel)]="acc" placeholder="Account number" id="login_accno" required>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" #pwd class="form-control" [placeholder]="accno" id="login_password" required>
+						<input type="password" name="passwd" [(ngModel)]="pwd" class="form-control" [placeholder]="accno" id="login_password" required>
 					</div>
 					
 					<div class="form-group">
-						<input type="submit" (click)="login(acc,pwd)" value="Login" class="btn float-right login_btn " style="width:50%" >
+						<input type="submit" (click)="login()" value="Login" class="btn float-right login_btn " style="width:50%" >
 					</div>
 				</form>
 			</div>

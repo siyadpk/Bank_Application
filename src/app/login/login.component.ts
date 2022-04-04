@@ -38,9 +38,9 @@ export class LoginComponent implements OnInit {
 
   // 
   
-  login(a:any,p:any){
-    var acc=a.value
-    var pwd=p.value
+  login(){
+    var acc=this.acc
+    var pwd=this.pwd
 
     let database=this.database
     console.log(database);
@@ -61,6 +61,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
-
 }
+
+
