@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatabaseService } from '../Service/database.service';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,9 @@ export class LoginComponent implements OnInit {
   acc=''
   pwd=''
 
-  database:any = {
-    1000:{usname:'siya',passwd:123,bal:1000},
-    1001:{usname:'zia',passwd:113,bal:1000},
-    1002:{usname:'ziyad',passwd:223,bal:1000}
-  }
+ 
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private ds:DatabaseService) { }
 
   ngOnInit(): void {
   }
@@ -43,7 +40,7 @@ export class LoginComponent implements OnInit {
     var acc=this.acc
     var pwd=this.pwd
 
-    let database=this.database
+    let database=this.ds.database
     console.log(database);
     
 
