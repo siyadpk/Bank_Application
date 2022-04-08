@@ -33,6 +33,57 @@ export class DatabaseService {
 
    }
 
+   login(acc:any,pwd:any){
+   
+
+    let database=this.database
+    console.log(database);
+    
+
+    if(acc in database){
+
+      if(pwd == database[acc]['passwd']){
+        return true
+      }
+      else{
+        alert("incorrect password")
+        return false
+      }
+
+    }
+    else{
+      alert("user doesnot exist")
+      return false
+    }
+
+  }
+
+  deposit(acc:any,pwd:any,amt:any){
+
+    let amount=parseInt(amt)
+
+    let database=this.database
+    if(acc in database){
+
+      if(pwd == database[acc]['passwd']){
+        database[acc]['bal']+=amount
+        return database[acc]['bal']
+
+      }
+      else{
+        alert('incorrect password')
+        return false
+
+      }
+    }
+    else{
+      alert('user doesnt exist')
+      return false
+    }
+
+  }
+
+
 
 
 }

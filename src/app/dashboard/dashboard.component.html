@@ -1,1 +1,118 @@
-<p>dashboard works!</p>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+<!--Made with love by Mutiullah Samim -->
+
+	
+</head>
+<body>
+
+   <nav class="navbar navbar-light bg-dark " >
+  <a class="navbar-brand  " href="#" style="color:rgb(153, 214, 32);"><b>&#169; HAFC Bank Pvt.Ltd </b></a>
+  <span class="quote text-light">Giving you freedom...</span>
+  <h5 style="color: rgb(28, 237, 237);font-family: Georgia, 'Times New Roman', Times, serif;">Transaction Form</h5>
+  
+</nav>
+
+<h1 style="font-family:'Times New Roman', Times, serif;color: rgb(29, 142, 195);">welcome user...</h1>
+
+
+<div class="container col-md-12 mt-0">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="text-center">Deposit</h3>
+				
+			</div>
+			<div class="card-body">
+				<form >
+
+                   
+
+
+
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" name="acc" [(ngModel)]="acc" placeholder="Account number" id="register_accno" required>
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" name="pwd" [(ngModel)]="pwd" class="form-control" placeholder="Password" id="register_password" required>
+					</div>
+
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" name="amount" [(ngModel)]="amt" placeholder="Amount" id="register_amount" required>
+						
+					</div>
+					
+					<div class="form-group">
+						<input type="submit" (click)="deposit()"  value="Deposit" class="btn float-right login_btn " style="width:50%" >
+					</div>
+				</form>
+			
+	</div>
+</div>
+</div>
+</div>
+
+
+<div  class="container col-md-12 mt-0">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="text-center">Withdraw</h3>
+				
+			</div>
+			<div class="card-body">
+				<form >
+
+                   
+
+
+
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" name="acc" [(ngModel)]="acc1" placeholder="Account number" id="register_accno" required>
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" name="pwd" [(ngModel)]="pwd1" class="form-control" placeholder="Password" id="register_password" required>
+					</div>
+
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" name="amount" [(ngModel)]="amt1" placeholder="Amount" id="register_amount" required>
+						
+					</div>
+					
+					<div class="form-group">
+						<input type="submit" (submit)="withdraw()" value="Withdraw" class="btn float-right login_btn " style="width:50%" >
+					</div>
+				</form>
+			
+	</div>
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html>
+

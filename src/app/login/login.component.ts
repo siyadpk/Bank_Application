@@ -44,19 +44,13 @@ export class LoginComponent implements OnInit {
     console.log(database);
     
 
-    if(acc in database){
+   let result=this.ds.login(acc,pwd)
 
-      if(pwd == database[acc]['passwd']){
-        this.router.navigateByUrl('dashboard')
-      }
-      else{
-        alert("incorrect password")
-      }
+    if(result){
+      alert('login success')
+      this.router.navigateByUrl('dashboard')
+    }
 
-    }
-    else{
-      alert("user doesnot exist")
-    }
   }
 
 }
