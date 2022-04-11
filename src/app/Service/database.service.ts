@@ -83,6 +83,41 @@ export class DatabaseService {
 
   }
 
+  withdraw(acc:any,pwd:any,amt:any){
+
+    let amount=parseInt(amt)
+
+    let database=this.database
+    if(acc in database){
+
+      if(pwd == database[acc]['passwd']){
+
+        if(database[acc]['bal']>amt){
+          database[acc]['bal']-=amount
+        return database[acc]['bal']
+
+        }else{
+          alert("insufficient balanace")
+          return false
+        }
+        
+
+      }
+      else{
+        alert('incorrect password')
+        return false
+
+      }
+    }
+    else{
+      alert('user doesnt exist')
+      return false
+    }
+
+  }
+
+
+
 
 
 

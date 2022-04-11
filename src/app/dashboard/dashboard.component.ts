@@ -33,7 +33,15 @@ export class DashboardComponent implements OnInit {
 
   }
   withdraw(){
-    alert('withdraw success')
-  }
+    
+    var acc=this.acc1
+    var amt=this.amt1
+    var pwd=this.pwd1
 
+    const result=this.ds.withdraw(acc,pwd,amt)
+    if(result){
+      alert(`amount ${amt} is deposited and your new balance is ${result}`)
+    }
+
+}
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatabaseService } from '../Service/database.service';
 
@@ -13,16 +14,24 @@ export class RegisterComponent implements OnInit {
   pwd=''
   acc=''
 
-  constructor(private ds:DatabaseService , private router:Router) { }
+  RegisterForm=this.fb.group({
+
+    uname:[''],
+    pwd:[''],
+    acc:['']
+
+  })
+
+  constructor(private ds:DatabaseService , private router:Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
 
   Register(){
-    var acc=this.acc
-    var uname=this.uname
-    var pwd=this.pwd
+    var acc=this.RegisterForm.value.acc
+    var uname=this.RegisterForm.value.uname
+    var pwd=this.RegisterForm.value.pwd
 
     var Result=this.ds.Register(acc,uname,pwd)
 
