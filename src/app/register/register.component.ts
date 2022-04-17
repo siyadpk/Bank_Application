@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatabaseService } from '../Service/database.service';
 
@@ -16,9 +16,9 @@ export class RegisterComponent implements OnInit {
 
   RegisterForm=this.fb.group({
 
-    uname:[''],
-    pwd:[''],
-    acc:['']
+    uname:['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
+    pwd:['',[Validators.required,Validators.pattern('[a-zA-Z 0-9]*')]],
+    acc:['',[Validators.required,Validators.pattern('[0-9]*')]]
 
   })
 
@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
     var uname=this.RegisterForm.value.uname
     var pwd=this.RegisterForm.value.pwd
 
+    if(this.RegisterForm.valid){
     var Result=this.ds.Register(acc,uname,pwd)
 
     if(Result){
@@ -41,6 +42,9 @@ export class RegisterComponent implements OnInit {
     }
     else{
       alert('Existing user..please Login!!!')
+    }}
+    else{
+      alert('invalid form')
     }
   }
 

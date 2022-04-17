@@ -11,6 +11,7 @@ export class DatabaseService {
     1001:{acc:1001,usname:'zia',passwd:113,bal:1000},
     1002:{acc:1002,usname:'ziyad',passwd:223,bal:1000}
   }
+  currentuser=''
 
   constructor() { }
 
@@ -43,6 +44,7 @@ export class DatabaseService {
     if(acc in database){
 
       if(pwd == database[acc]['passwd']){
+        this.currentuser=database[acc]['usname']
         return true
       }
       else{

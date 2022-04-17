@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DatabaseService } from '../Service/database.service';
 
 @Component({
@@ -7,26 +8,47 @@ import { DatabaseService } from '../Service/database.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-   acc=''
-   amt=''
-   pwd=''
+  
 
-   acc1=''
-   pwd1=''
-   amt1=''
+  username=''
 
-  constructor( private ds:DatabaseService) { }
+   DepositForm=this.fb.group({
+
+    amt:['',[Validators.required,Validators.pattern('[0-9]*')]],
+    pwd:['',[Validators.required,Validators.pattern('[a-zA-Z 0-9]*')]],
+    acc:['',[Validators.required,Validators.pattern('[0-9]*')]]
+
+  })
+
+  WithdrawForm=this.fb.group({
+
+    amt1:['',[Validators.required,Validators.pattern('[0-9]*')]],
+    pwd1:['',[Validators.required,Validators.pattern('[a-zA-Z 0-9]*')]],
+    acc1:['',[Validators.required,Validators.pattern('[0-9]*')]]
+
+  })
+
+
+
+  constructor( private ds:DatabaseService,private fb:FormBuilder) { 
+    this.username=this.ds.currentuser
+    
+  }
 
   ngOnInit(): void {
   }
   deposit(){
-    var acc=this.acc
-    var amt=this.amt
-    var pwd=this.pwd
+    var acc=this.DepositForm.value.acc
+    var amt=this.DepositForm.value.amt
+    var pwd=this.DepositForm.value.pwd
 
     const result=this.ds.deposit(acc,pwd,amt)
+    if(this.DepositForm.valid){
     if(result){
       alert(`amount ${amt} is deposited and your new balance is ${result}`)
+    }}
+    else{
+      alert('invalid Form')
     }
 
 
@@ -34,13 +56,18 @@ export class DashboardComponent implements OnInit {
   }
   withdraw(){
     
-    var acc=this.acc1
-    var amt=this.amt1
-    var pwd=this.pwd1
+    var acc=this.WithdrawForm.value.acc1
+    var amt=this.WithdrawForm.value.amt1
+    var pwd=this.WithdrawForm.value.pwd1
 
     const result=this.ds.withdraw(acc,pwd,amt)
+    if(this.WithdrawForm.valid){
     if(result){
+
       alert(`amount ${amt} is deposited and your new balance is ${result}`)
+    }}
+    else{
+      alert('invalid form')
     }
 
 }

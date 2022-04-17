@@ -32,6 +32,10 @@
 						<input type="text" class="form-control" name="uname" formControlName="uname" placeholder="Name" id="register_uname" required>
 						
 					</div>
+					<div *ngIf="(this.RegisterForm.get('uname')?.touched||this.RegisterForm.get('uname')?.dirty)&&(this.RegisterForm.get('uname')?.errors)" 
+					style="color: red;">
+						invalid username
+					</div>
 
 
 
@@ -42,11 +46,19 @@
 						<input type="text" class="form-control" name="acc" formControlName="acc" placeholder="Account number" id="register_accno" required>
 						
 					</div>
+					<div *ngIf="(this.RegisterForm.get('acc')?.touched||this.RegisterForm.get('acc')?.dirty)&&(this.RegisterForm.get('acc')?.errors)" 
+					style="color: red;">
+						invalid Account Number
+					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
 						<input type="password" name="pwd" formControlName="pwd" class="form-control" placeholder="Password" id="register_password" required>
+					</div>
+					<div *ngIf="(this.RegisterForm.get('pwd')?.touched||this.RegisterForm.get('pwd')?.dirty)&&(this.RegisterForm.get('pwd')?.errors)" 
+					style="color: red;">
+						invalid Account Number
 					</div>
 					
 					<div class="form-group">
