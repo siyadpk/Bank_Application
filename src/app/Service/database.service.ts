@@ -7,11 +7,12 @@ export class DatabaseService {
 
 
   database:any = {
-    1000:{acc:1000,usname:'siya',passwd:123,bal:1000},
-    1001:{acc:1001,usname:'zia',passwd:113,bal:1000},
-    1002:{acc:1002,usname:'ziyad',passwd:223,bal:1000}
+    1000:{acc:1000,usname:'siya',passwd:123,bal:1000,transaction:[]},
+    1001:{acc:1001,usname:'zia',passwd:113,bal:1000,transaction:[]},
+    1002:{acc:1002,usname:'ziyad',passwd:223,bal:1000,transaction:[]}
   }
   currentuser=''
+  currentaccno:any
 
   constructor() { }
 
@@ -27,7 +28,8 @@ export class DatabaseService {
           acc,
           uname,
           passwd,
-          bal:0
+          bal:0,
+          transaction:[]
         }
         return true
       }
@@ -45,6 +47,7 @@ export class DatabaseService {
 
       if(pwd == database[acc]['passwd']){
         this.currentuser=database[acc]['usname']
+        this.currentaccno=acc
         return true
       }
       else{
@@ -69,6 +72,13 @@ export class DatabaseService {
 
       if(pwd == database[acc]['passwd']){
         database[acc]['bal']+=amount
+        database[acc]['transaction'].push({
+          type:'CREDIT',
+          amount:amount
+
+        })
+        console.log(database);
+        
         return database[acc]['bal']
 
       }
@@ -96,6 +106,13 @@ export class DatabaseService {
 
         if(database[acc]['bal']>amt){
           database[acc]['bal']-=amount
+          database[acc]['transaction'].push({
+            type:'DEBIT',
+            amount:amount
+  
+          })
+          console.log(database);
+          
         return database[acc]['bal']
 
         }else{
@@ -115,6 +132,11 @@ export class DatabaseService {
       alert('user doesnt exist')
       return false
     }
+
+  }
+
+  Transaction(acno:any){
+    return this.database[acno].transaction
 
   }
 
