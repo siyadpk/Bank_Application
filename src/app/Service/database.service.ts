@@ -14,9 +14,33 @@ export class DatabaseService {
   currentuser=''
   currentaccno:any
 
-  constructor() { }
+  constructor() { 
 
-   Register(acc:any,uname:any,passwd:any){
+    this.getFromLocal()
+  }
+
+  saveToLocal(){
+    localStorage.setItem('database',JSON.stringify(this.database))
+    localStorage.setItem('currentuser',JSON.stringify(this.currentuser))
+    localStorage.setItem('currentaccno',JSON.stringify(this.currentaccno))
+  }
+
+
+  getFromLocal(){
+    if('database' in localStorage){
+     this.database=JSON.parse(localStorage.getItem('database')|| '')
+    }
+    if('currentuser' in localStorage){
+      this.currentuser=JSON.parse(localStorage.getItem('currentuser')|| '')
+     }
+     if('currentaccno' in localStorage){
+      this.currentaccno=JSON.parse(localStorage.getItem('currentaccno')|| '')
+     }
+  }
+
+
+
+   Register(acc:any,usname:any,passwd:any){
 
     let db=this.database
 
@@ -26,11 +50,12 @@ export class DatabaseService {
       else{
         db[acc]={
           acc,
-          uname,
+          usname,
           passwd,
           bal:0,
           transaction:[]
         }
+        this.saveToLocal()
         return true
       }
 
@@ -48,6 +73,7 @@ export class DatabaseService {
       if(pwd == database[acc]['passwd']){
         this.currentuser=database[acc]['usname']
         this.currentaccno=acc
+        this.saveToLocal()
         return true
       }
       else{
@@ -78,6 +104,7 @@ export class DatabaseService {
 
         })
         console.log(database);
+        this.saveToLocal()
         
         return database[acc]['bal']
 
@@ -112,6 +139,7 @@ export class DatabaseService {
   
           })
           console.log(database);
+          this.saveToLocal()
           
         return database[acc]['bal']
 
@@ -141,7 +169,9 @@ export class DatabaseService {
   }
 
 
-
+logout(){
+  
+}
 
 
 

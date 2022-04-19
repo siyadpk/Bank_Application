@@ -15,16 +15,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">{{type}}</th>
-        <td>{{amount}}</td>
+      <tr *ngFor="let t of transaction">
+        <th scope="row">{{t.type}}</th>
+        <td>{{t.amount}}</td>
         
       </tr>
-      <tr>
-        <th scope="row">Debit</th>
-        <td>1000</td>
-        
-      </tr>
+     
      
     </tbody>
   </table>
