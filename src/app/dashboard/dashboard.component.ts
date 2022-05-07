@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   
 
   username=''
+  currentacc:any
 
    DepositForm=this.fb.group({
 
@@ -30,19 +31,21 @@ export class DashboardComponent implements OnInit {
   })
 
 
+  Logindate:any
 
   constructor( private ds:DatabaseService,private fb:FormBuilder , private router:Router) { 
-    this.username=this.ds.currentuser
+    this.username=JSON.parse(localStorage.getItem('currentuser')||'')
+    this.Logindate=new Date()
     
   }
 
   ngOnInit(): void {
-    if('currentuser' in localStorage){
+    // if('currentuser' in localStorage){
    
-    }else{
-      alert('please Login!!!')
-      this.router.navigateByUrl('')
-    }
+    // }else{
+    //   alert('please Login!!!')
+    //   this.router.navigateByUrl('')
+    // }
   }
   deposit(){
     var acc=this.DepositForm.value.acc
@@ -79,10 +82,27 @@ export class DashboardComponent implements OnInit {
 
 }
 
+deleteAccnt(){
+
+  this.currentacc=JSON.parse(localStorage.getItem('currentaccno')||"")
+  console.log(this.currentacc);
+  
+}
+
 
   logout(){
+    alert('Are you sure?')
     localStorage.removeItem('currentuser')
     localStorage.removeItem('currentaccno')
     this.router.navigateByUrl('')
+  }
+
+
+  onCancel(){
+    this.currentacc=""
+  }
+  onDelete(event:any){
+    alert('Are you sure want to delete this account'+event)
+
   }
 }

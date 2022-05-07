@@ -34,18 +34,36 @@ export class RegisterComponent implements OnInit {
     var pwd=this.RegisterForm.value.pwd
 
     if(this.RegisterForm.valid){
-    var Result=this.ds.Register(acc,uname,pwd)
 
-    if(Result){
-      alert('registration completed')
+   this.ds.Register(acc,uname,pwd)
+   .subscribe((result:any)=>{
+    if(result){
+      alert(result.message)
       this.router.navigateByUrl('')
+  
+    }
+  },
+    (result:any)=>{
+      alert(result.error.message);
+      this.router.navigateByUrl('')
+
+      
+
+    }
+  )
     }
     else{
-      alert('Existing user..please Login!!!')
-    }}
-    else{
-      alert('invalid form')
+      alert('invalid Form')
     }
+  
+    
+    
+  
+      
+
+  
+   
+   
   }
 
 }

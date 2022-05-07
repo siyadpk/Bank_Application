@@ -1,0 +1,5 @@
+<div *ngIf="item" style=" color: azure;" class="d-flex justify-content-center">
+	<h1 style="font-size: medium;">Are you sure want to delete this account {{item}}?</h1>
+	<button (click)="delete()" class="btn btn-success"  >Yes</button>
+	<button (click)="cancel()" class="btn btn-primary">No</button>
+</div>

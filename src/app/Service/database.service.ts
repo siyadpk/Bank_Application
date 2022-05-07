@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class DatabaseService {
   currentuser=''
   currentaccno:any
 
-  constructor() { 
+  constructor(private http:HttpClient) { 
 
     this.getFromLocal()
   }
@@ -40,52 +41,26 @@ export class DatabaseService {
 
 
 
-   Register(acc:any,usname:any,passwd:any){
+   Register(acc:any,uname:any,pwd:any){
 
-    let db=this.database
-
-      if(acc in db){
-        return false
-      }
-      else{
-        db[acc]={
-          acc,
-          usname,
-          passwd,
-          bal:0,
-          transaction:[]
-        }
-        this.saveToLocal()
-        return true
-      }
-
+   const data={
+     acc,
+     uname,
+     pwd
+   }
+   return this.http.post('http://localhost:3000/register',data)
    }
 
    login(acc:any,pwd:any){
+
+    const data={
+      acc,
+      pwd
+    }
    
-
-    let database=this.database
-    console.log(database);
+    return this.http.post('http://localhost:3000/login',data)
+   
     
-
-    if(acc in database){
-
-      if(pwd == database[acc]['passwd']){
-        this.currentuser=database[acc]['usname']
-        this.currentaccno=acc
-        this.saveToLocal()
-        return true
-      }
-      else{
-        alert("incorrect password")
-        return false
-      }
-
-    }
-    else{
-      alert("user doesnot exist")
-      return false
-    }
 
   }
 
