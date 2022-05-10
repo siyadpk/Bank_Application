@@ -8,14 +8,24 @@ import { DatabaseService } from '../Service/database.service';
 })
 export class TransactionComponent implements OnInit {
 
-  acno:any
+  acc:any
   transaction:any
   
 
   constructor(private ds:DatabaseService) { 
     
-    this.acno=this.ds.currentaccno
-    this.transaction=this.ds.Transaction(this.acno)
+    this.acc=JSON.parse(localStorage.getItem('currentaccno')||'')
+    this.ds.Transaction(this.acc)
+    .subscribe((result:any)=>{
+      if(result){
+
+      this.transaction=result.transaction
+
+   } },
+   (result)=>{
+     alert(result.error.message)
+   }
+   )
 
     
     

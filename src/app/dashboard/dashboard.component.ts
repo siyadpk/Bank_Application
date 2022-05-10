@@ -52,14 +52,24 @@ export class DashboardComponent implements OnInit {
     var amt=this.DepositForm.value.amt
     var pwd=this.DepositForm.value.pwd
 
-    const result=this.ds.deposit(acc,pwd,amt)
+
     if(this.DepositForm.valid){
-    if(result){
-      alert(`amount ${amt} is deposited and your new balance is ${result}`)
-    }}
+
+    this.ds.deposit(acc,pwd,amt)
+    .subscribe((result:any)=>{
+      
+        if(result){
+          alert(result.message)
+        }   
+    },
+    (result)=>{
+      alert(result.error.message)
+    })
+  }
     else{
       alert('invalid Form')
     }
+
 
 
 
@@ -70,15 +80,22 @@ export class DashboardComponent implements OnInit {
     var amt=this.WithdrawForm.value.amt1
     var pwd=this.WithdrawForm.value.pwd1
 
-    const result=this.ds.withdraw(acc,pwd,amt)
     if(this.WithdrawForm.valid){
-    if(result){
 
-      alert(`amount ${amt} is deposited and your new balance is ${result}`)
-    }}
-    else{
-      alert('invalid form')
+      this.ds.withdraw(acc,pwd,amt)
+      .subscribe((result:any)=>{
+        
+          if(result){
+            alert(result.message)
+          }   
+      },
+      (result)=>{
+        alert(result.error.message)
+      })
     }
+      else{
+        alert('invalid Form')
+      }
 
 }
 
@@ -102,7 +119,19 @@ deleteAccnt(){
     this.currentacc=""
   }
   onDelete(event:any){
-    alert('Are you sure want to delete this account'+event)
+    console.log(event+'he');
+    
+    this.ds.onDelete(event)
+    .subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
+        this.router.navigateByUrl('')
+      }
 
+    },
+    (result:any)=>{
+      alert(result.error.message)
+
+    })
   }
 }

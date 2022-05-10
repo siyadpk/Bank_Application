@@ -1,5 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+const option={
+  headers:new HttpHeaders()
+}
 
 @Injectable({
   providedIn: 'root'
@@ -66,86 +70,72 @@ export class DatabaseService {
 
   deposit(acc:any,pwd:any,amt:any){
 
-    let amount=parseInt(amt)
-
-    let database=this.database
-    if(acc in database){
-
-      if(pwd == database[acc]['passwd']){
-        database[acc]['bal']+=amount
-        database[acc]['transaction'].push({
-          type:'CREDIT',
-          amount:amount
-
-        })
-        console.log(database);
-        this.saveToLocal()
-        
-        return database[acc]['bal']
-
-      }
-      else{
-        alert('incorrect password')
-        return false
-
-      }
+    const data={
+      amt,
+      acc,
+      pwd,
+    
     }
-    else{
-      alert('user doesnt exist')
-      return false
+    
+    return this.http.post('http://localhost:3000/deposit',data,this.getOptions())
+
+
+  }
+  
+
+  //token to req-headers
+  getOptions(){
+    const token=JSON.parse(localStorage.getItem("token")||'')
+    let headers=new HttpHeaders()
+    if(token){
+      headers=headers.append('x-access-token',token)
+      option.headers=headers
     }
+    console.log(option.headers);
+    
+    return option
+
 
   }
 
   withdraw(acc:any,pwd:any,amt:any){
+    
+    const data={
+      amt,
+      acc,
+      pwd,
+    
+    }
+    
+    return this.http.post('http://localhost:3000/withdraw',data,this.getOptions())
 
-    let amount=parseInt(amt)
-
-    let database=this.database
-    if(acc in database){
-
-      if(pwd == database[acc]['passwd']){
-
-        if(database[acc]['bal']>amt){
-          database[acc]['bal']-=amount
-          database[acc]['transaction'].push({
-            type:'DEBIT',
-            amount:amount
-  
-          })
-          console.log(database);
-          this.saveToLocal()
-          
-        return database[acc]['bal']
-
-        }else{
-          alert("insufficient balanace")
-          return false
-        }
+    
         
-
-      }
-      else{
-        alert('incorrect password')
-        return false
-
-      }
-    }
-    else{
-      alert('user doesnt exist')
-      return false
-    }
 
   }
 
-  Transaction(acno:any){
-    return this.database[acno].transaction
-
+  Transaction(acc:any){
+    const data={
+    
+      acc,
+      
+    }
+    
+    return this.http.post('http://localhost:3000/transaction',data,this.getOptions())
   }
 
 
 logout(){
   
+}
+
+onDelete(acc:any){
+ 
+  console.log(acc+"hoo");
+  
+  return this.http.delete('http://localhost:3000/delete/'+acc,this.getOptions())
+
+
 }
 
 
